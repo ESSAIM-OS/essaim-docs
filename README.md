@@ -7,6 +7,7 @@
   </p>
   <p>
     <a href="https://essaimos.com"><strong>Website (essaimos.com)</strong></a> ·
+    <a href="https://essaimos.com/en/demo"><strong>Live Demo (5-GPU Hub)</strong></a> ·
     <a href="https://essaimos.com/releases"><strong>Downloads &amp; Releases</strong></a> ·
     <a href="https://essaimos.com/docs"><strong>Installation Docs</strong></a> ·
     <a href="https://essaimos.com/energie"><strong>World Electricity Tariffs</strong></a> ·
@@ -61,8 +62,9 @@ sha256sum -c SHA256SUMS
 
 ---
 
-## Documentation (FR / EN / ES / DE)
+## Documentation & Live Demo (FR / EN / ES / DE)
 
+* **Interactive Hub Live Demo (2× 5-GPU Linux Rigs + Windows WSL2)**: [essaimos.com/en/demo](https://essaimos.com/en/demo) ([FR: /demo](https://essaimos.com/demo) · [ES: /es/demo](https://essaimos.com/es/demo) · [DE: /de/demo](https://essaimos.com/de/demo))
 * **Quick Install & Network Setup**: [essaimos.com/docs](https://essaimos.com/docs)
 * **World Tariffs & Spot Simulator**: [essaimos.com/energie](https://essaimos.com/energie)
 * **HiveOS Comparison**: [essaimos.com/comparatif](https://essaimos.com/comparatif)
