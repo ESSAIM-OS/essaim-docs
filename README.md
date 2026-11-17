@@ -67,6 +67,30 @@ sha256sum -c SHA256SUMS
 * **World Tariffs & Spot Simulator**: [essaimos.com/energie](https://essaimos.com/energie)
 * **HiveOS Comparison**: [essaimos.com/comparatif](https://essaimos.com/comparatif)
 * **Mobile App & Telegram Guide**: [essaimos.com/mobile-telegram](https://essaimos.com/mobile-telegram)
+* **Ad Banners & Embeddable Media Kit**: [essaimos.com/en/banners](https://essaimos.com/en/banners) ([FR: essaimos.com/bannieres](https://essaimos.com/bannieres))
+
+## Promo Banners & Media Kit ([`promo/`](promo/))
+
+Want to link to or promote **Essaim OS** on a website, mining blog, forum, or social campaign? Use our hosted assets in [`promo/`](promo/) or copy ready-made HTML / Markdown / BBCode snippets from [**essaimos.com/en/banners**](https://essaimos.com/en/banners) ([FR](https://essaimos.com/bannieres)):
+
+| Format | Français (`-fr`) | English (`-en`) |
+|---|---|---|
+| **Fluid Animated Vector (960×176 SVG)** | [`essaim-banner-fluid-fr.svg`](promo/essaim-banner-fluid-fr.svg) | [`essaim-banner-fluid-en.svg`](promo/essaim-banner-fluid-en.svg) |
+| **Leaderboard (728×90 PNG)** | [`essaim-banner-728x90-fr.png`](promo/essaim-banner-728x90-fr.png) | [`essaim-banner-728x90-en.png`](promo/essaim-banner-728x90-en.png) |
+| **Medium Rectangle (300×250 PNG)** | [`essaim-banner-300x250-fr.png`](promo/essaim-banner-300x250-fr.png) | [`essaim-banner-300x250-en.png`](promo/essaim-banner-300x250-en.png) |
+| **Social / Wide Display (1200×628 PNG)** | [`essaim-banner-1200x628-fr.png`](promo/essaim-banner-1200x628-fr.png) | [`essaim-banner-1200x628-en.png`](promo/essaim-banner-1200x628-en.png) |
+
+```html
+<a href="https://essaimos.com/" target="_blank" rel="noopener">
+  <img src="https://essaimos.com/promo/essaim-banner-fluid-fr.svg"
+       alt="Essaim OS — OS de minage local auto-hébergé"
+       style="width:100%;max-width:960px;height:auto;border:0;display:block;" loading="lazy" />
+</a>
+```
+
+<div align="center">
+  <img src="promo/essaim-banner-fluid-en.svg" alt="Essaim OS fluid banner" width="760" />
+</div>
 
 ## Support & Bug Reports
 
