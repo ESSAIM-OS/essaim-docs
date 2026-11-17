@@ -1,0 +1,39 @@
+# Essaim Hub 2.0.38. Charger d'abord l'image, puis lancer depuis ce dossier :
+#
+#   docker load -i essaim-hub-2.0.38-docker-arm64.tar     (Raspberry Pi ; -amd64 sur un PC)
+#   docker compose up -d
+#
+# Le hub répond sur http://ADRESSE-DE-LA-MACHINE:8420. Ses données restent dans le volume essaim-hub-data.
+services:
+  essaim-hub:
+    image: essaim-hub:2.0.38
+    container_name: essaim-hub
+    restart: unless-stopped
+    # Réseau de l'hôte : le hub voit les travailleuses du réseau local et peut les réveiller (Wake-on-LAN).
+    network_mode: host
+    read_only: true
+    tmpfs:
+      - /tmp
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    environment:
+      TZ: Europe/Paris
+      # Sans Avahi sur l'hôte, le hub n'annonce pas essaim-hub.local : on y accède par son adresse.
+      ESSAIM_NO_AVAHI: "1"
+    volumes:
+      - essaim-hub-data:/data
+      # Empreinte matérielle de la machine hôte pour la licence (lecture seule).
+      - /etc/machine-id:/etc/host-machine-id:ro
+      # Sur Raspberry Pi, décommenter la ligne suivante pour lier la licence au n° de série CPU :
+      # - /sys/firmware/devicetree/base/serial-number:/etc/essaim-serial:ro
+      # Annonce essaim-hub.local par l'Avahi de l'hôte : retirer ESSAIM_NO_AVAHI ci-dessus, créer sur l'hôte
+      # le compte du hub (useradd --system --uid 10002 essaim-hub), puis activer la ligne suivante.
+      # - /run/dbus:/run/dbus
+      # Accès distant par Tailscale installé sur l'hôte (tailscale set --operator=essaim-hub) :
+      # - /usr/bin/tailscale:/usr/bin/tailscale:ro
+      # - /run/tailscale:/run/tailscale
+
+volumes:
+  essaim-hub-data:

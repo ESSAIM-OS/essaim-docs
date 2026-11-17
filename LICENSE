@@ -1,0 +1,17 @@
+Essaim OS Documentation & Release Manifests
+Copyright (c) 2026 Essaim OS (https://essaimos.com)
+
+1. Documentation & Checksums
+   The markdown documentation, issue templates, and SHA256 release manifests
+   in this repository (`essaim-docs`) may be freely read, referenced, and shared
+   for verification and support purposes.
+
+2. Essaim OS Software & Binaries
+   Compiled Essaim OS binaries, disk images, Hub containers, worker agents, and
+   mobile applications distributed via https://essaimos.com are proprietary
+   commercial software:
+   - 1st worker rig per Hub is free to use without expiration.
+   - Additional active worker rigs require a valid Essaim OS license key
+     from https://essaimos.com/tarifs.
+   - Redistribution, reverse engineering, or modification of distributed
+     binaries to bypass licensing restrictions is not permitted.

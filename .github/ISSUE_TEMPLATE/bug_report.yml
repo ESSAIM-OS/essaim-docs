@@ -1,0 +1,47 @@
+name: Bug Report / Rapport de bug
+description: Report a bug in Essaim OS Hub, USB Rig Agent, Windows WSL2 Launcher, Mobile App, or Tariffs
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: input
+    id: version
+    attributes:
+      label: Essaim OS Version / Version d'Essaim OS
+      description: Found in Hub footer or Settings / Versions (e.g. 2.0.38)
+      placeholder: "2.0.38"
+    validations:
+      required: true
+  - type: dropdown
+    id: component
+    attributes:
+      label: Component / Composant
+      options:
+        - Essaim Hub (Docker ARM64 / Raspberry Pi)
+        - Essaim Hub (Docker AMD64)
+        - Essaim Hub (Bare-metal .img.xz / .qcow2 VM)
+        - Worker Rig (Bootable Linux USB)
+        - Worker Rig (Windows WSL2 / essaim-agent.exe)
+        - Android App / Tailscale
+        - Electricity Tariffs / Spot API / Telegram
+        - Documentation / Website (essaimos.com)
+    validations:
+      required: true
+  - type: textarea
+    id: hardware
+    attributes:
+      label: Hardware / Matériel
+      description: GPU model(s), CPU, Hub device (Raspberry Pi 4/5, Mini-PC, NAS...)
+      placeholder: "e.g. Raspberry Pi 4 Hub + 2x RTX 3070 USB rig"
+  - type: textarea
+    id: description
+    attributes:
+      label: What happened? / Description du problème
+      description: Describe the issue and steps to reproduce. Remove any API tokens or private keys!
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant Logs (optional) / Journaux (optionnel)
+      description: Paste sanitized error output (make sure no passwords, tokens, or wallet addresses are included).
+      render: shell
