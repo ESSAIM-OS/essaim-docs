@@ -3,15 +3,15 @@
   <h1>Essaim OS</h1>
   <p>
     <strong>Self-hosted GPU &amp; CPU mining OS and local fleet hub</strong><br />
-    <em>OS de minage local auto-hébergé &amp; orchestrateur de flotte — Raspberry Pi, Linux USB, Windows WSL2 &amp; Android</em>
+    <em>Raspberry Pi · Docker · Bare-Metal Linux USB · Windows WSL2 · Android &amp; Telegram</em>
   </p>
   <p>
-    <a href="https://essaimos.com"><strong>Website (essaimos.com)</strong></a> ·
+    <a href="https://essaimos.com/en"><strong>Website (essaimos.com)</strong></a> ·
     <a href="https://essaimos.com/en/demo"><strong>Live Demo (5-GPU Hub)</strong></a> ·
-    <a href="https://essaimos.com/releases"><strong>Downloads &amp; Releases</strong></a> ·
-    <a href="https://essaimos.com/docs"><strong>Installation Docs</strong></a> ·
-    <a href="https://essaimos.com/energie"><strong>World Electricity Tariffs</strong></a> ·
-    <a href="https://essaimos.com/mobile-telegram"><strong>Mobile &amp; Telegram</strong></a> ·
+    <a href="https://essaimos.com/en/releases"><strong>Downloads &amp; Releases</strong></a> ·
+    <a href="https://essaimos.com/en/docs"><strong>Installation Docs</strong></a> ·
+    <a href="https://essaimos.com/en/smart-energy"><strong>World Electricity Tariffs</strong></a> ·
+    <a href="https://essaimos.com/en/mobile-telegram"><strong>Mobile &amp; Telegram</strong></a> ·
     <a href="../../issues"><strong>Issues &amp; Support</strong></a>
   </p>
   <br />
@@ -27,7 +27,7 @@
 * **GPU Auto-Tune & Mining Sandboxing** — Built-in GPU clock/power tuning, dual-mining & flight sheets, plus kernel-isolated sandboxing for custom third-party miners.
 * **Global Electricity Tariffs (9 Currencies)** — Fixed kWh rate, 2-tier / 3-tier Time-of-Use presets (France HC/HP & EDF Tempo Blue/White/Red, Spain 2.0TD, UK Economy 7 & Octopus Go, US/CA/AU/CH TOU), live Spot APIs (`Octopus Agile`, `Red Eléctrica PVPC`, `aWATTar DE/AT`, `Tibber`), price-cap auto-pause & **Wake-on-LAN** resume.
 * **Mobile App & Telegram Bot** — Monitor rigs, temperatures, profits and trigger start/stop/reboot remotely via Telegram commands or the Android app with embedded Tailscale (`tsnet`, no external VPN config needed).
-* **Simple, Outage-Resilient Pricing** — **1st worker FREE forever** (no account required), then **$1 / month per additional active worker**, verified via signed offline-resilient **Ed25519** tokens (`essaimos.com/tarifs`).
+* **Simple, Outage-Resilient Pricing** — **1st worker FREE forever** (no account required), then **$1 / month per additional active worker**, verified via signed offline-resilient **Ed25519** tokens (`essaimos.com/en/tarifs`).
 
 <div align="center">
   <img src="assets/mobile-dashboard.jpg" alt="Essaim Hub mobile dashboard" width="230" />
@@ -39,7 +39,7 @@
 
 ## Official Downloads & Verification (`v2.0.38`)
 
-Download verified installers and disk images from [**essaimos.com/releases**](https://essaimos.com/releases):
+Download verified installers and disk images from [**essaimos.com/en/releases**](https://essaimos.com/en/releases):
 
 | Artifact | Target | How to Run |
 |---|---|---|
@@ -54,7 +54,7 @@ Every release bundle includes the Linux worker image (`essaim.img.xz`), Windows 
 
 * [`releases/2.0.38/SHA256SUMS`](releases/2.0.38/SHA256SUMS) — Checksums for release `2.0.38`
 * [`releases/2.0.38/VERSIONS.txt`](releases/2.0.38/VERSIONS.txt) — Component versions bundled in `2.0.38`
-* Detached Ed25519 signature (`SHA256SUMS.sig`) and verification instructions are published on [**essaimos.com/releases**](https://essaimos.com/releases).
+* Detached Ed25519 signature (`SHA256SUMS.sig`) and verification instructions are published on [**essaimos.com/en/releases**](https://essaimos.com/en/releases).
 
 ```bash
 sha256sum -c SHA256SUMS
@@ -65,27 +65,27 @@ sha256sum -c SHA256SUMS
 ## Documentation & Live Demo (FR / EN / ES / DE)
 
 * **Interactive Hub Live Demo (2× 5-GPU Linux Rigs + Windows WSL2)**: [essaimos.com/en/demo](https://essaimos.com/en/demo) ([FR: /demo](https://essaimos.com/demo) · [ES: /es/demo](https://essaimos.com/es/demo) · [DE: /de/demo](https://essaimos.com/de/demo))
-* **Quick Install & Network Setup**: [essaimos.com/docs](https://essaimos.com/docs)
-* **World Tariffs & Spot Simulator**: [essaimos.com/energie](https://essaimos.com/energie)
-* **HiveOS Comparison**: [essaimos.com/comparatif](https://essaimos.com/comparatif)
-* **Mobile App & Telegram Guide**: [essaimos.com/mobile-telegram](https://essaimos.com/mobile-telegram)
+* **Quick Install & Network Setup**: [essaimos.com/en/docs](https://essaimos.com/en/docs)
+* **World Tariffs & Spot Simulator**: [essaimos.com/en/smart-energy](https://essaimos.com/en/smart-energy)
+* **HiveOS Comparison**: [essaimos.com/en/compare](https://essaimos.com/en/compare)
+* **Mobile App & Telegram Guide**: [essaimos.com/en/mobile-telegram](https://essaimos.com/en/mobile-telegram)
 * **Ad Banners & Embeddable Media Kit**: [essaimos.com/en/banners](https://essaimos.com/en/banners) ([FR: essaimos.com/bannieres](https://essaimos.com/bannieres))
 
 ## Promo Banners & Media Kit ([`promo/`](promo/))
 
 Want to link to or promote **Essaim OS** on a website, mining blog, forum, or social campaign? Use our hosted assets in [`promo/`](promo/) or copy ready-made HTML / Markdown / BBCode snippets from [**essaimos.com/en/banners**](https://essaimos.com/en/banners) ([FR](https://essaimos.com/bannieres)):
 
-| Format | Français (`-fr`) | English (`-en`) |
+| Format | English (`-en`) | French (`-fr`) |
 |---|---|---|
-| **Fluid Animated Vector (960×176 SVG)** | [`essaim-banner-fluid-fr.svg`](promo/essaim-banner-fluid-fr.svg) | [`essaim-banner-fluid-en.svg`](promo/essaim-banner-fluid-en.svg) |
-| **Leaderboard (728×90 PNG)** | [`essaim-banner-728x90-fr.png`](promo/essaim-banner-728x90-fr.png) | [`essaim-banner-728x90-en.png`](promo/essaim-banner-728x90-en.png) |
-| **Medium Rectangle (300×250 PNG)** | [`essaim-banner-300x250-fr.png`](promo/essaim-banner-300x250-fr.png) | [`essaim-banner-300x250-en.png`](promo/essaim-banner-300x250-en.png) |
-| **Social / Wide Display (1200×628 PNG)** | [`essaim-banner-1200x628-fr.png`](promo/essaim-banner-1200x628-fr.png) | [`essaim-banner-1200x628-en.png`](promo/essaim-banner-1200x628-en.png) |
+| **Fluid Animated Vector (960×176 SVG)** | [`essaim-banner-fluid-en.svg`](promo/essaim-banner-fluid-en.svg) | [`essaim-banner-fluid-fr.svg`](promo/essaim-banner-fluid-fr.svg) |
+| **Leaderboard (728×90 PNG)** | [`essaim-banner-728x90-en.png`](promo/essaim-banner-728x90-en.png) | [`essaim-banner-728x90-fr.png`](promo/essaim-banner-728x90-fr.png) |
+| **Medium Rectangle (300×250 PNG)** | [`essaim-banner-300x250-en.png`](promo/essaim-banner-300x250-en.png) | [`essaim-banner-300x250-fr.png`](promo/essaim-banner-300x250-fr.png) |
+| **Social / Wide Display (1200×628 PNG)** | [`essaim-banner-1200x628-en.png`](promo/essaim-banner-1200x628-en.png) | [`essaim-banner-1200x628-fr.png`](promo/essaim-banner-1200x628-fr.png) |
 
 ```html
-<a href="https://essaimos.com/" target="_blank" rel="noopener">
-  <img src="https://essaimos.com/promo/essaim-banner-fluid-fr.svg"
-       alt="Essaim OS — OS de minage local auto-hébergé"
+<a href="https://essaimos.com/en" target="_blank" rel="noopener">
+  <img src="https://essaimos.com/promo/essaim-banner-fluid-en.svg"
+       alt="Essaim OS — Self-hosted GPU & CPU mining OS"
        style="width:100%;max-width:960px;height:auto;border:0;display:block;" loading="lazy" />
 </a>
 ```

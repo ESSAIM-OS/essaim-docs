@@ -1,4 +1,4 @@
-name: Bug Report / Rapport de bug
+name: Bug Report
 description: Report a bug in Essaim OS Hub, USB Rig Agent, Windows WSL2 Launcher, Mobile App, or Tariffs
 title: "[Bug]: "
 labels: ["bug"]
@@ -6,7 +6,7 @@ body:
   - type: input
     id: version
     attributes:
-      label: Essaim OS Version / Version d'Essaim OS
+      label: Essaim OS Version
       description: Found in Hub footer or Settings / Versions (e.g. 2.0.38)
       placeholder: "2.0.38"
     validations:
@@ -14,7 +14,7 @@ body:
   - type: dropdown
     id: component
     attributes:
-      label: Component / Composant
+      label: Component
       options:
         - Essaim Hub (Docker ARM64 / Raspberry Pi)
         - Essaim Hub (Docker AMD64)
@@ -29,19 +29,19 @@ body:
   - type: textarea
     id: hardware
     attributes:
-      label: Hardware / Matériel
+      label: Hardware
       description: GPU model(s), CPU, Hub device (Raspberry Pi 4/5, Mini-PC, NAS...)
       placeholder: "e.g. Raspberry Pi 4 Hub + 2x RTX 3070 USB rig"
   - type: textarea
     id: description
     attributes:
-      label: What happened? / Description du problème
+      label: What happened?
       description: Describe the issue and steps to reproduce. Remove any API tokens or private keys!
     validations:
       required: true
   - type: textarea
     id: logs
     attributes:
-      label: Relevant Logs (optional) / Journaux (optionnel)
+      label: Relevant Logs (optional)
       description: Paste sanitized error output (make sure no passwords, tokens, or wallet addresses are included).
       render: shell

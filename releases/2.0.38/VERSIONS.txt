@@ -1,11 +1,11 @@
 Essaim Hub 2.0.38
 
 hub                  2.0.38
-agent Linux          2.0.38
+Linux agent          2.0.38
 essaim-pack.zip      2.0.38
 essaim.img.xz        2.0.38
 essaim-wsl.tar.gz    2.0.38
 essaim-agent.exe     2.0.38
-essaim-agent.cmd     sans version
-essaim-agent.ps1     sans version
+essaim-agent.cmd     unversioned
+essaim-agent.ps1     unversioned
 essaim-mobile.apk    2.0.38
