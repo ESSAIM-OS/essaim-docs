@@ -66,6 +66,23 @@ Every release bundle includes the Linux worker image (`essaim.img.xz`), Windows 
 * **Default password**: `essaimos-pass` (**mandatory change on first login** via console or SSH)
 * **Security**: SSH is restricted to the local LAN (and Tailscale) and direct `root` SSH login is disabled (`PermitRootLogin no`). Daily management stays in the browser (`http://essaim-hub.local:8420`). On Docker installs, SSH belongs to the host OS.
 
+### Supported Native RGB & Case Fan Hardware (Bare-Metal Linux)
+
+Bare-metal workers include built-in Rust hardware control for RGB lighting and motherboard PWM case fans (zero OpenRGB or third-party daemon required). Under Windows WSL2, Windows keeps control of case fans and LEDs.
+
+| Category | Supported Models & Chipsets | Bus / IDs | Capabilities |
+|---|---|---|---|
+| **Gigabyte / AORUS Motherboards** | ITE `IT8297`, `IT5702`, `IT5711` (AORUS / Gaming / Ultra Durable AM4, AM5, LGA1700/1851 — e.g. B850M AORUS ELITE, B650, X670/X870, Z690/Z790) | USB HID (`048D:*`) | Up to 11 onboard zones + 6 addressable 5 V ARGB headers per-LED (57 LEDs/strip, automatic GRB/RGB calibration) |
+| **Gigabyte / AORUS RTX 50-Series GPUs** | NVIDIA Blackwell **RTX 5090 / 5080 / 5070 Ti / 5070** (RGB Fusion 2 Blackwell) | NVIDIA I²C (`0x75`) | Static color, 1-click Night blackout, live GPU temp gauge & synced animations |
+| **Gigabyte / AORUS RTX 20 / 30 / 40 GPUs** | Gaming / Master / Vision / Eagle cards with RGB Fusion 2 | NVIDIA I²C (`0x62`, `0x63`, `0x70`, `0x71`, `0x72`) | Static color, Night blackout, GPU temp gauge & hive alert status |
+| **AMD Wraith Prism CPU Cooler** | Cooler Master / AMD Wraith Prism (via internal USB header cable) | USB HID (`2516:0051`) | Per-LED control of the 15-LED ring, fan blade LEDs, and AMD logo |
+| **ASUS Aura Sync Motherboards & Hubs** | ASUS ROG / TUF / Prime USB Aura & addressable controllers | USB HID (`0B05:18F3`, `1939`, `19AF`, `1872`, `1867`) | Static color, Night blackout, GPU temp gauge & hive status |
+| **Generic Linux Kernel LEDs** | Any RGB / multicolor LED exposed by the Linux kernel (`*rgb*`, `*multicolor*`, `*aura*`, `*aorus*`, or `multi_intensity`) | `/sys/class/leds` | RGB color / brightness control & Night blackout |
+
+* **Motherboard PWM case fans (`/sys/class/hwmon`)**: auto-loads `nct6775` (Nuvoton), `it87` (ITE `it8628`/`it8686`), `gigabyte-wmi`, `asus-wmi-sensors`, `asus-ec-sensors`, and `dell-smm-hwmon` — supports BIOS Auto, Fixed % while mining, and **GPU-temp target** mode.
+* **22 built-in lighting modes**: Stock, 1-click Night Blackout, Static Color, GPU Temp Gauge (green/gold/red), Hive Status, EDF Tempo Indicator, plus 16 smooth animations (Swarm Pulse, Cyber Bee, Plasma Reactor, Aurora Ice, Magma Forge, Heartbeat, Caterpillar, K2000 Scanner, Meteor Chase, Dual Vortex, Police Strobe, Lightning Storm, Beacon Flash, Starlight Twinkle, Matrix Rain, Party Disco).
+* Want another RGB controller added? [Open an issue](../../issues/new/choose) with your `lsusb` and `i2cdetect -l` output.
+
 ### Checksums & Manifests
 
 * [`releases/2.0.38/SHA256SUMS`](releases/2.0.38/SHA256SUMS) — Checksums for release `2.0.38`
