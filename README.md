@@ -50,6 +50,12 @@ Download verified installers and disk images from [**essaimos.com/en/releases**]
 
 Every release bundle includes the Linux worker image (`essaim.img.xz`), Windows WSL2 launcher (`essaim-agent.exe` + `essaim-wsl.tar.gz`), and Android companion APK (`essaim-mobile.apk`) served locally by your Hub once started (`http://<hub-ip>:8420`).
 
+### Default Maintenance SSH Credentials (`.img.xz` / `.qcow2` & Bare-Metal Rigs)
+
+* **Username**: `essaimos` (member of `sudo`)
+* **Default password**: `essaimos-pass` (**mandatory change on first login** via console or SSH)
+* **Security**: SSH is restricted to the local LAN (and Tailscale) and direct `root` SSH login is disabled (`PermitRootLogin no`). Daily management stays in the browser (`http://essaim-hub.local:8420`). On Docker installs, SSH belongs to the host OS.
+
 ### Checksums & Manifests
 
 * [`releases/2.0.38/SHA256SUMS`](releases/2.0.38/SHA256SUMS) — Checksums for release `2.0.38`
