@@ -50,6 +50,16 @@ Download verified installers and disk images from [**essaimos.com/en/releases**]
 
 Every release bundle includes the Linux worker image (`essaim.img.xz`), Windows WSL2 launcher (`essaim-agent.exe` + `essaim-wsl.tar.gz`), and Android companion APK (`essaim-mobile.apk`) served locally by your Hub once started (`http://<hub-ip>:8420`).
 
+### Hub Hardware & Storage Requirements
+
+| Resource | Minimum | Recommended | Notes |
+|---|---|---|---|
+| **CPU** | 1× 64-bit vCPU (`ARM64` or `x86_64`) | 2 cores | Raspberry Pi 3/4/5, Orange Pi, NAS, mini-PC, or Proxmox/QEMU VM (`< 2%` CPU usage in daily operation). |
+| **RAM** | **512 MB** (128 MB free in Docker) | **1 GB** (dedicated mini-PC / VM) | The compiled Rust Hub process itself uses only **~20–30 MB** RAM (runs cleanly under Docker `--memory 96m`). |
+| **Storage — Disk Image / VM (`.img.xz` / `.qcow2`)** | **8 GB** (strict minimum) | **16 GB** (32 GB comfortable) | ~1.7 GB used on first boot, plus headroom for 1-click worker image sync (`essaim.img.xz` ~1.15 GB + WSL/APK ~150 MB), NVIDIA/ROCm GPU driver cache (~400–600 MB per version), and SQLite history. VM resize: `qemu-img resize essaim-hub-<version>-amd64.qcow2 +12G`. |
+| **Storage — Docker (Raspberry Pi / NAS / Linux)** | **4 GB free** (strict minimum) | **8–16 GB free** | ~1.3 GB `.tar` archive (removable after `docker load`), ~1.4 GB loaded Docker image, plus the `essaim-hub-data` volume (~1.3 GB synced worker images + ~0.5–1.5 GB GPU driver cache + temporary `.part` download headroom). |
+| **Network** | Private LAN (TCP `8420`) | Wired Ethernet | Same LAN as workers (`network_mode: host` in Docker, `bridge` NIC on Proxmox/QEMU VMs). |
+
 ### Default Maintenance SSH Credentials (`.img.xz` / `.qcow2` & Bare-Metal Rigs)
 
 * **Username**: `essaimos` (member of `sudo`)
