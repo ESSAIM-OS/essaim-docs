@@ -27,9 +27,9 @@
 
 ---
 
-**Essaim OS** is a self-hosted, local-LAN cryptocurrency mining operating system and fleet hub written in **Rust** — a zero-cloud, privacy-first alternative to HiveOS, RaveOS, minerstat, and SimpleMining for **NVIDIA/AMD GPU rigs**, **CPU miners**, **Windows WSL2 PCs**, and **Bitaxe / NerdQAxe / Avalon Nano 3 Solo ASICs**.
+**Essaim OS** is a **self-hosted, proprietary (closed-source)** local-LAN cryptocurrency mining operating system and fleet hub written in **Rust** — a zero-cloud, privacy-first alternative to HiveOS, RaveOS, minerstat, and SimpleMining for **NVIDIA/AMD GPU rigs**, **CPU miners**, **Windows WSL2 PCs**, and **Bitaxe / NerdQAxe / Avalon Nano 3 Solo ASICs**. Official compiled binaries and disk images are distributed exclusively as Ed25519-signed releases via [**essaimos.com**](https://essaimos.com).
 
-*(FR : **Essaim OS** est un OS de minage GPU, CPU et ASIC Solo 100 % auto-hébergé en réseau local écrit en Rust — alternative sans cloud à HiveOS avec 1re travailleuse gratuite à vie, tarifs EDF Tempo / Spot mondiaux, prises connectées Shelly LAN, RGB/écrans/AIO Linux natifs et appli Android Tailscale.)*
+*(FR : **Essaim OS** est un OS de minage GPU, CPU et ASIC Solo **propriétaire (source fermé)** et 100 % auto-hébergé en réseau local écrit en Rust — alternative sans cloud à HiveOS avec 1re travailleuse gratuite à vie, tarifs EDF Tempo / Spot mondiaux, prises connectées Shelly LAN, RGB/écrans/AIO Linux natifs et appli Android Tailscale. Les binaires et images signés sont distribués exclusivement via [essaimos.com](https://essaimos.com).)*
 
 ---
 
@@ -58,9 +58,9 @@
 
 ---
 
-## Open-Source Linux Hardware Ecosystem (`ESSAIM-OS`)
+## Standalone Open-Source Linux Hardware Drivers (`ESSAIM-OS`)
 
-Independent Linux hardware drivers extracted from or optimized for **Essaim OS** (usable standalone on any Linux desktop, homelab, or headless compute server):
+While **Essaim OS** itself is **closed-source commercial software**, our team publishes and maintains independent open-source Linux hardware drivers (usable standalone on any Linux desktop, homelab, or headless compute server):
 
 | Repository | Hardware / Scope | Highlights |
 |---|---|---|
@@ -176,4 +176,4 @@ Found a bug with a GPU driver, electricity tariff preset, or installer?
 
 ---
 
-> *Note: This repository hosts public documentation, release manifests, and community issue tracking for **Essaim OS**. Official compiled binaries and disk images are distributed exclusively via [essaimos.com](https://essaimos.com).*
+> *Note: **Essaim OS** is proprietary, closed-source software (see [`LICENSE`](LICENSE)). This repository hosts public documentation, release manifests, and community issue tracking only — source code for Essaim OS is private, and official compiled binaries / disk images are distributed exclusively via [essaimos.com](https://essaimos.com).*

@@ -1,6 +1,6 @@
 # System Architecture — Essaim OS
 
-Technical overview of how **Essaim Hub**, **Essaim Agent**, **SQLite WAL storage**, **Ed25519 licensing**, and **remote access** work together on a local network.
+Technical overview of how **Essaim Hub**, **Essaim Agent**, **SQLite WAL storage**, **Ed25519 licensing**, and **remote access** work together on a local network. *(Essaim OS is proprietary, closed-source compiled Rust software distributed as Ed25519-signed binaries and disk images via [essaimos.com](https://essaimos.com).)*
 
 ---
 
@@ -29,7 +29,7 @@ flowchart LR
 
 ### 1. `essaim-hub` (Local Fleet Orchestrator, Rust + Axum + SQLite WAL)
 - **Single compiled binary** serving both the REST API (`/api/*`) and the embedded zero-dependency SPA web interface on TCP `:8420`.
-- **SD-Card-Friendly SQLite WAL**: Every polling cycle batches all worker metrics, Shelly wall-power readings (`wall_power`, `wall_energy_wh`), workload histories, and events into **one single SQLite transaction**, with gapless 5-minute rollups (`samples_5m`, 90-day retention) and 1-click full `.db` backup & verified restore.
+- **SD-Card-Friendly SQLite WAL**: Every polling cycle batches all worker metrics, Shelly wall-power readings, workload histories, and events into **one single SQLite transaction**, with gapless 5-minute rollups (90-day retention) and 1-click full `.db` backup & verified restore.
 - **Smart Energy Engine**: Evaluates fixed rates, HC/HP, global 2/3-tier TOU, France EDF Tempo, and live Spot APIs (`Octopus Agile`, `REE PVPC`, `aWATTar`, `Tibber`) hour-by-hour against recorded wall/GPU energy, triggering automatic pause, Wake-on-LAN, or Shelly relay wake-up.
 - **Zero-Touch Reflash Relink**: Recognizes reflashed USB worker keys by IP or MAC and lets operators re-associate them without losing historical charts, overclock profiles, schedules, or Shelly bindings.
 

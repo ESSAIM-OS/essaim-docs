@@ -9,6 +9,7 @@ An objective technical and cost comparison between **Essaim OS** and major cloud
 | Feature | **Essaim OS** | **HiveOS** | **RaveOS** | **minerstat** | **SimpleMining (SMOS)** |
 |---|---|---|---|---|---|
 | **Architecture** | **100% Self-Hosted LAN Hub (Rust)** | Cloud-dependent SaaS | Cloud-dependent SaaS | Cloud-dependent SaaS | Cloud-dependent SaaS |
+| **License / Distribution** | **Closed-source (proprietary)**, signed local binaries (`essaimos.com`) | Closed-source SaaS | Closed-source SaaS | Closed-source SaaS | Closed-source SaaS |
 | **Works if Cloud / Internet is Down** | **Yes** (LAN Hub + 10-day offline Ed25519 token) | Partial (no dashboard / control) | Partial (no dashboard / control) | Partial (no dashboard / control) | Partial (no dashboard / control) |
 | **Hub Footprint** | ~20–30 MB RAM (Raspberry Pi, Docker, NAS, VM) | Cloud only | Cloud only | Cloud only | Cloud only |
 | **Free Tier** | **1 GPU/CPU rig free forever** + **unlimited micro Solo ASICs** | 1–4 rigs (pool restrictions apply on 2–4) | 1 rig free | 1 worker free | None (trial only) |

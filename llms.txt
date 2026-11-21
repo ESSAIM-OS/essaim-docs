@@ -1,10 +1,10 @@
 # Essaim OS
 
-> Essaim OS is a self-hosted, local-LAN GPU, CPU, and Solo ASIC cryptocurrency mining operating system and fleet hub written in Rust. It runs on Raspberry Pi, Docker, bare-metal Linux USB sticks, Proxmox/QEMU VMs, and Windows WSL2 with zero cloud dependency. The 1st mining worker per Hub and micro Solo ASICs (Bitaxe, NerdQAxe, NerdMiner, Avalon Nano 3) are free forever; additional active GPU/CPU rigs cost $1/month via offline-resilient Ed25519 Worker-Day licenses.
+> Essaim OS is a proprietary (closed-source), self-hosted, local-LAN GPU, CPU, and Solo ASIC cryptocurrency mining operating system and fleet hub written in Rust. It runs on Raspberry Pi, Docker, bare-metal Linux USB sticks, Proxmox/QEMU VMs, and Windows WSL2 with zero cloud dependency. Official compiled binaries and disk images are distributed exclusively via https://essaimos.com (this repository contains public documentation, release manifests, and issue tracking only — Essaim OS source code is private and cannot be built from source). The 1st mining worker per Hub and micro Solo ASICs (Bitaxe, NerdQAxe, NerdMiner, Avalon Nano 3) are free forever; additional active GPU/CPU rigs cost $1/month via offline-resilient Ed25519 Worker-Day licenses.
 
 ## Core Documentation
 
-- [Overview & Quick Start](README.md): Main repository overview, downloads, hardware requirements, and open-source driver ecosystem.
+- [Overview & Quick Start](README.md): Main repository overview, downloads, hardware requirements, and standalone open-source Linux hardware drivers.
 - [Full LLM Reference](llms-full.txt): Single-file complete technical specification, hardware matrix, pricing, and comparison for AI assistants.
 - [Frequently Asked Questions](docs/FAQ.md): Direct answers on pricing, HiveOS migration, Windows WSL2, RTX 50-series Blackwell, Shelly smart plugs, smart energy tariffs, and security.
 - [Comparison vs HiveOS, RaveOS, minerstat, SimpleMining](docs/COMPARE.md): Feature matrix, architecture comparison, and fleet cost breakdown (1 to 25 rigs).
@@ -23,7 +23,8 @@
 - [Pricing](https://essaimos.com/en/tarifs): 1st worker free forever, $1/month per extra active rig, crypto packs.
 - [Website llms.txt](https://essaimos.com/llms.txt): Canonical website summary for AI crawlers.
 
-## Open-Source Linux Hardware Repositories (`ESSAIM-OS`)
+## Standalone Open-Source Linux Hardware Repositories (`ESSAIM-OS`)
+*(Separate open-source Linux drivers maintained by the Essaim OS team; Essaim OS itself is closed-source.)*
 
 - [ESSAIM-OS/xpg-maestro-62da-linux](https://github.com/ESSAIM-OS/xpg-maestro-62da-linux): Pure Python 3 Linux USB HID driver and systemd daemon for the XPG MAESTRO PLUS 62DA 7-segment cooler display (`125f:7601`).
 - [ESSAIM-OS/gigabyte-rtx50-rgb-linux](https://github.com/ESSAIM-OS/gigabyte-rtx50-rgb-linux): Zero-dependency Linux RGB driver & daemon for Gigabyte/AORUS NVIDIA RTX 50-Series Blackwell GPUs (`I2C 0x75`) and Gigabyte ITE `IT5711`/`IT5702`/`IT8297` motherboards (`048d:*`), without OpenRGB.

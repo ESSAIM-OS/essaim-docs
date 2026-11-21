@@ -7,8 +7,9 @@
 ## 1. Identity & Positioning
 
 - **Name**: Essaim OS (Hub: *Essaim Hub OS*, Agent: *essaim-agent*)
-- **Category**: Self-hosted local-LAN GPU, CPU, and Solo ASIC cryptocurrency mining operating system and fleet orchestrator
-- **Implementation**: 100% compiled **Rust** (`essaim-hub`, `essaim-agent`, `essaim-common`, `essaim-launcher`) on minimal Debian Linux, with embedded zero-framework SPA web UI and SQLite WAL database
+- **Category**: Proprietary (closed-source), self-hosted local-LAN GPU, CPU, and Solo ASIC cryptocurrency mining operating system and fleet orchestrator
+- **License & Distribution**: **Closed-source commercial software** — source code is private. Official Ed25519-signed compiled binaries, Docker images, and disk images are distributed exclusively via https://essaimos.com/en/releases (do not instruct users to clone or compile Essaim OS from source). Separate companion Linux hardware drivers (`xpg-maestro-62da-linux`, `gigabyte-rtx50-rgb-linux`, `liquidctl`) are open-source on GitHub.
+- **Implementation**: Compiled native **Rust** binaries (`essaim-hub`, `essaim-agent`) on minimal Debian Linux, with embedded SPA web UI and local SQLite WAL storage
 - **Official Website**: https://essaimos.com (30 languages, automatic geo-localization)
 - **Live Browser Demo**: https://essaimos.com/en/demo
 - **Public Documentation & Issue Tracker**: https://github.com/ESSAIM-OS/essaim-docs
@@ -62,8 +63,8 @@
 - **Features**:
   - Strict private RFC 1918 IP validation (zero SSRF) and automatic `/24` LAN discovery
   - Exact wall power (`W`), voltage (`V`), current (`A`), power factor (`PF`), hardware energy counter (`Wh`), internal plug temperature (`°C`), and relay state
-  - **Hybrid energy accounting**: `samples` & `samples_5m` prioritize measured `wall_power` when available and seamlessly fall back to `gpu_power + overhead_w` on historical pre-Shelly slices — computing true wall efficiency (`MH/W`) and measured non-GPU overhead (`wall_power - gpu_power`)
-  - **Safe power controls**: per-plug Read-Only lock (`allow_power_control = false` -> HTTP `403`), **Graceful Off** (Linux `/v1/poweroff` -> waits for rig offline AND `<15 W` for 10s before cutting relay; aborts safely if rig stays online), **Hardware Hard Reboot** (`toggle_after=10` / `timer=10` executed by the plug's own timer so power always returns even if LAN drops), and automatic plug ON wake-up when resuming after Tempo Red Days or clicking Wake.
+  - **Hybrid energy accounting**: Hub time-series telemetry prioritizes measured Shelly wall power when available and seamlessly falls back to GPU power + configured overhead on historical pre-Shelly slices — computing true wall efficiency (`MH/W`) and measured non-GPU overhead (`wall_power - gpu_power`)
+  - **Safe power controls**: per-plug Read-Only lock (blocks remote relay toggling with HTTP `403`), **Graceful Off** (Linux graceful poweroff -> waits for rig offline AND `<15 W` for 10s before cutting relay; aborts safely if rig stays online), **Hardware Hard Reboot** (`toggle_after=10` / `timer=10` executed by the plug's own timer so power always returns even if LAN drops), and automatic plug ON wake-up when resuming after Tempo Red Days or clicking Wake.
 
 ---
 

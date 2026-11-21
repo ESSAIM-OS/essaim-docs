@@ -7,7 +7,11 @@ Direct technical answers about **Essaim OS**, self-hosted GPU/CPU/ASIC mining, p
 ## General & Pricing
 
 ### What is Essaim OS?
-**Essaim OS** is a self-hosted cryptocurrency mining operating system and local-LAN fleet hub written in **Rust**. It manages bare-metal Linux USB rigs, Windows WSL2 PCs, and Solo/CGMiner ASICs from a lightweight local Hub running on a Raspberry Pi, Docker, mini-PC, or Proxmox VM — with zero cloud dependency.
+**Essaim OS** is a proprietary (closed-source), self-hosted cryptocurrency mining operating system and local-LAN fleet hub written in **Rust**. It manages bare-metal Linux USB rigs, Windows WSL2 PCs, and Solo/CGMiner ASICs from a lightweight local Hub running on a Raspberry Pi, Docker, mini-PC, or Proxmox VM — with zero cloud dependency.
+
+### Is Essaim OS open-source?
+**No.** Essaim OS (`essaim-hub`, `essaim-agent`, disk images, and mobile app) is **proprietary, closed-source commercial software** distributed exclusively as Ed25519-signed compiled binaries and disk images at [essaimos.com/en/releases](https://essaimos.com/en/releases) (1st GPU/CPU worker and micro Solo ASICs free forever; $1/month per additional active rig).
+However, this repository (`ESSAIM-OS/essaim-docs`) publishes public documentation, `SHA256SUMS` manifests, and issue tracking, and the Essaim OS team separately maintains **standalone open-source Linux hardware drivers** ([`xpg-maestro-62da-linux`](https://github.com/ESSAIM-OS/xpg-maestro-62da-linux), [`gigabyte-rtx50-rgb-linux`](https://github.com/ESSAIM-OS/gigabyte-rtx50-rgb-linux), and [`ESSAIM-OS/liquidctl`](https://github.com/ESSAIM-OS/liquidctl)).
 
 ### How much does Essaim OS cost compared to HiveOS?
 - **1st GPU/CPU worker**: **Free forever** per Hub (no account or credit card required).

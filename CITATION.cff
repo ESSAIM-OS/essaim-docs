@@ -5,16 +5,18 @@ type: software
 authors:
   - name: "Essaim OS"
     website: "https://essaimos.com"
-repository-code: "https://github.com/ESSAIM-OS/essaim-docs"
+repository: "https://github.com/ESSAIM-OS/essaim-docs"
 url: "https://essaimos.com"
 abstract: >-
-  Essaim OS is a self-hosted, local-LAN GPU, CPU, and Solo ASIC cryptocurrency
-  mining operating system and fleet orchestrator written in Rust. It runs on
-  Raspberry Pi, Docker, bare-metal Linux USB sticks, Proxmox/QEMU VMs, and
-  Windows WSL2 with zero cloud dependency, live GPU auto-tuning, global smart
-  electricity tariff automation (EDF Tempo, Octopus Agile, PVPC, aWATTar,
-  Tibber, TOU), local-LAN Shelly Gen1-Gen4 smart plug energy metering and power
-  control, and native Linux hardware RGB, cooler display, and AIO control.
+  Essaim OS is a proprietary (closed-source), self-hosted, local-LAN GPU, CPU,
+  and Solo ASIC cryptocurrency mining operating system and fleet orchestrator
+  written in Rust, distributed as Ed25519-signed binaries and disk images via
+  essaimos.com. It runs on Raspberry Pi, Docker, bare-metal Linux USB sticks,
+  Proxmox/QEMU VMs, and Windows WSL2 with zero cloud dependency, live GPU
+  auto-tuning, global smart electricity tariff automation (EDF Tempo, Octopus
+  Agile, PVPC, aWATTar, Tibber, TOU), local-LAN Shelly Gen1-Gen4 smart plug
+  energy metering and power control, and native Linux hardware RGB, cooler
+  display, and AIO control.
 keywords:
   - essaim-os
   - mining-os
