@@ -1,0 +1,99 @@
+# Essaim OS — Complete Technical Reference (`llms-full.txt`)
+
+> Canonical machine-readable summary of **Essaim OS** (`https://essaimos.com`, `https://github.com/ESSAIM-OS/essaim-docs`) for LLMs, AI search engines, and developer assistants.
+
+---
+
+## 1. Identity & Positioning
+
+- **Name**: Essaim OS (Hub: *Essaim Hub OS*, Agent: *essaim-agent*)
+- **Category**: Self-hosted local-LAN GPU, CPU, and Solo ASIC cryptocurrency mining operating system and fleet orchestrator
+- **Implementation**: 100% compiled **Rust** (`essaim-hub`, `essaim-agent`, `essaim-common`, `essaim-launcher`) on minimal Debian Linux, with embedded zero-framework SPA web UI and SQLite WAL database
+- **Official Website**: https://essaimos.com (30 languages, automatic geo-localization)
+- **Live Browser Demo**: https://essaimos.com/en/demo
+- **Public Documentation & Issue Tracker**: https://github.com/ESSAIM-OS/essaim-docs
+- **Primary Differentiators vs Cloud Mining OSes (HiveOS, RaveOS, minerstat, SimpleMining)**:
+  1. **Zero cloud dependency**: Hub runs locally on your own LAN (`:8420`) on a Raspberry Pi, Docker container, NAS, mini-PC, or Proxmox VM. Mining, overclocking, tariff automation, and dashboard keep working if the internet or an external cloud fails.
+  2. **Pricing**: 1st GPU/CPU worker is **free forever** (no account required). Additional active GPU/CPU workers cost **$1/month** (billed per active Worker-Day — 3x cheaper than HiveOS's $3/rig/month). Micro Solo ASICs (Bitaxe, NerdQAxe, NerdMiner, Avalon Nano 3) are **free and excluded from worker quota**.
+  3. **Outage-resilient Ed25519 licensing**: Signed license tokens remain valid offline for 10 days during internet outages.
+  4. **Compiled Rust reliability**: ~20–30 MB RAM Hub footprint (`<2%` CPU on Raspberry Pi), single-transaction SQLite WAL cycles to protect SD cards, 10-minute supervised overclock trial state machine, and per-GPU fault isolation by `PCI_BUS_ID` so healthy GPUs keep mining when one card throws an Xid error.
+  5. **Native Linux hardware control without OpenRGB**: Built-in Rust drivers for NVIDIA Blackwell RTX 50-Series RGB (`I2C 0x75`), Gigabyte/AORUS ITE `IT5711`/`IT5702`/`IT8297` motherboards, AMD Wraith Prism, ASUS Aura Sync, motherboard PWM case fans, XPG MAESTRO PLUS 62DA 7-segment display (`125f:7601`), Linux-optimized `liquidctl` AIO watercoolers, and **Shelly Gen1–Gen4 local-LAN smart plugs & energy meters**.
+
+---
+
+## 2. Deployment Targets & Requirements
+
+### Essaim Hub (`essaim-hub`, TCP `:8420`)
+- **Formats**:
+  - Docker ARM64 (`essaim-hub-<v>-docker-arm64.tar`) — Raspberry Pi 3/4/5, Orange Pi, ARM SBCs
+  - Docker AMD64 (`essaim-hub-<v>-docker-amd64.tar`) — Linux servers, NAS (Synology, TrueNAS, OpenMediaVault, Unraid)
+  - Bare-Metal Disk Image (`essaim-hub-<v>-amd64.img.xz`) — UEFI & BIOS mini-PCs
+  - Virtual Machine Disk (`essaim-hub-<v>-amd64.qcow2`) — Proxmox VE, QEMU/KVM
+- **Minimum / Recommended Specs**:
+  - CPU: 1x 64-bit vCPU min / 2 cores recommended (`ARM64` or `x86_64`)
+  - RAM: 512 MB min (128 MB free in Docker; Rust binary uses ~20–30 MB) / 1 GB recommended
+  - Storage: 8 GB strict min / 16–32 GB recommended for `.img.xz`/`.qcow2` (holds synced worker images ~1.3 GB + NVIDIA/ROCm driver cache ~400–600 MB/version + SQLite history); 4 GB free min / 8–16 GB recommended for Docker
+  - Network: Private RFC 1918 LAN (`10/8`, `172.16/12`, `192.168/16`), `network_mode: host` on Docker or `bridge` NIC on VM
+- **Default Maintenance SSH (`.img.xz` / `.qcow2` & Bare-Metal Rigs)**: user `essaimos` (`sudo`), password `essaimos-pass` (mandatory change on first login, `PermitRootLogin no`, LAN-only).
+
+### Mining Workers (`essaim-agent`, TCP `:8421`)
+- **Bare-Metal Linux USB/SSD** (`essaim.img.xz`): Flash with Raspberry Pi Imager / balenaEtcher / Rufus. Full NVIDIA & AMD GPU overclocking, power limits, live NVML/AMD hardware OC limit probing (supports RTX 5090/5080/5070 Ti/5070/5060/5050 out-of-the-box without prior autotune), fan curves, chained GPU Auto-Tune, CPU mining with thermal cutoff (>=95°C for 60s), native RGB/fan/AIO/display control, and hot GPU driver switching (NVIDIA open kernel modules / AMD ROCm OpenCL) with 10-minute automatic rollback.
+- **Windows WSL2 Worker** (`essaim-agent.exe` + `essaim-wsl.tar.gz`): Mine on a Windows gaming/workstation PC without wiping Windows or dual-booting. Includes optional anti-freeze CPU thread guard (reserves N threads for Windows + low priority).
+- **Solo & Industrial ASICs (Direct LAN Polling)**:
+  - **Free Micro Solo ASICs (excluded from quota)**: Bitaxe (Supra, Ultra, Gamma, Hex via AxeOS REST API), NerdQAxe / NerdMiner v2, Canaan Avalon Nano 3 (CGMiner API). Live pool editing, AxeOS frequency/voltage tuning with anti-overvoltage guards (`100–1200 MHz`, `900–1450 mV`), Best Diff tracking, and Solo Block Found Telegram alerts.
+  - **Standard ASICs**: CGMiner-compatible Antminer / Avalon miners.
+
+---
+
+## 3. Smart Energy, Profitability & Shelly Smart Plugs
+
+### Global Electricity Tariffs (9 Currencies)
+- Fixed kWh rate
+- Simple Off-Peak / Peak (HC/HP)
+- Worldwide 2-tier & 3-tier Time-of-Use (TOU) presets (France HC/HP, Spain 2.0TD, UK Economy 7 / Octopus Go, US, Canada, Australia, Switzerland)
+- **EDF Tempo (France)** Blue / White / Red days with automatic Red-Day stop/poweroff and Wake-on-LAN or Shelly relay resume
+- **Live Spot Electricity APIs**: `Octopus Agile` (UK 30-min), `Red Eléctrica PVPC` (Spain), `aWATTar` (Germany & Austria), `Tibber` (Nordics/EU)
+- Configurable price-cap auto-pause + automatic resume
+
+### Local-LAN Shelly Smart Plugs & Energy Meters (Zero Cloud)
+- **Supported Models**:
+  - **Gen2 / Gen3 / Gen4** (RPC + HTTP Digest SHA-256): Shelly Plus Plug S, Plug S Gen3, Plus 1PM, 1PM Mini Gen3, Plus 2PM, Pro 1PM/2PM/4PM (1 HTTP poll per box for all 4 channels), Pro EM-50, Pro 3EM, PM Mini Gen3
+  - **Gen1** (REST + HTTP Basic): Shelly Plug S, Shelly Plug, Shelly 1PM, Shelly 2.5, Shelly EM, Shelly 3EM
+- **Features**:
+  - Strict private RFC 1918 IP validation (zero SSRF) and automatic `/24` LAN discovery
+  - Exact wall power (`W`), voltage (`V`), current (`A`), power factor (`PF`), hardware energy counter (`Wh`), internal plug temperature (`°C`), and relay state
+  - **Hybrid energy accounting**: `samples` & `samples_5m` prioritize measured `wall_power` when available and seamlessly fall back to `gpu_power + overhead_w` on historical pre-Shelly slices — computing true wall efficiency (`MH/W`) and measured non-GPU overhead (`wall_power - gpu_power`)
+  - **Safe power controls**: per-plug Read-Only lock (`allow_power_control = false` -> HTTP `403`), **Graceful Off** (Linux `/v1/poweroff` -> waits for rig offline AND `<15 W` for 10s before cutting relay; aborts safely if rig stays online), **Hardware Hard Reboot** (`toggle_after=10` / `timer=10` executed by the plug's own timer so power always returns even if LAN drops), and automatic plug ON wake-up when resuming after Tempo Red Days or clicking Wake.
+
+---
+
+## 4. Native Linux Hardware Control (Zero OpenRGB)
+
+| Hardware | Models / Chips | Interface / ID | Driver in Essaim OS |
+|---|---|---|---|
+| Gigabyte / AORUS RTX 50-Series GPUs | RTX 5090, 5080, 5070 Ti, 5070 (Blackwell) | NVIDIA I²C `0x75` | Built-in Rust (`essaim-agent`) & standalone [gigabyte-rtx50-rgb-linux](https://github.com/ESSAIM-OS/gigabyte-rtx50-rgb-linux) |
+| Gigabyte / AORUS RTX 20/30/40 GPUs | RGB Fusion 2 cards | NVIDIA I²C `0x62, 0x63, 0x70, 0x71, 0x72` | Built-in Rust (`essaim-agent`) |
+| Gigabyte / AORUS Motherboards | ITE `IT5711`, `IT5702`, `IT8297` (AM4/AM5/LGA1700/1851) | USB HID `048d:*` | Built-in Rust: 11 zones + 6x 57-LED ARGB strips (auto GRB/RGB) |
+| AMD Wraith Prism Cooler | Cooler Master / AMD Wraith Prism | USB HID `2516:0051` | Built-in Rust: per-LED 15-LED ring + fan + logo |
+| ASUS Aura Sync | ROG / TUF / Prime USB controllers | USB HID `0b05:18f3/1939/19af/1872/1867` | Built-in Rust |
+| XPG MAESTRO PLUS 62DA Display | 3-zone 7-segment cooler display | USB HID `125f:7601` | Hybrid Rust native `usbfs` + bridge to [xpg-maestro-62da-linux](https://github.com/ESSAIM-OS/xpg-maestro-62da-linux) |
+| AIO Liquid Coolers, USB Hubs & PSUs | NZXT Kraken X/Z/Elite, Corsair iCUE Commander/Hydro/HX-RMi, Aquacomputer D5 Next/Quadro/Octo, ASUS ROG Ryujin/Ryuo, MSI CoreLiquid, Lian Li Galahad II/Uni Fan | USB HID/Bulk | Linux-optimized [ESSAIM-OS/liquidctl](https://github.com/ESSAIM-OS/liquidctl) (no Pillow, `<0.5 ms` sysfs pre-scan, pump floor `>=40%`, emergency `100%` at `48°C` liquid) |
+| Motherboard PWM Case Fans | `nct6775`, `it87` (`it8628`/`it8686`), `gigabyte-wmi`, `asus-wmi-sensors`, `asus-ec-sensors`, `dell-smm-hwmon` | `/sys/class/hwmon` | Built-in Rust: BIOS Auto, Fixed %, or GPU-temp target |
+
+---
+
+## 5. Remote Access, Security & Licensing
+
+- **Mobile App (Android)**: React Native / Expo app with embedded Tailscale (`tsnet`) — access your local Hub from Wi-Fi or 4G/5G without opening any router ports or installing a separate VPN app.
+- **Telegram Bot**: Outbound long-polling only (no public webhook/port), single-use pairing code, alerts for offline rigs, GPU Xid, GPU/CPU overheating, hashrate drops, Solo blocks / Best Diff, and Shelly overtemp/overpower/offline events.
+- **Custom Miner Sandboxing**: Any third-party miner binary not in the built-in catalog runs inside an isolated Linux namespace + `nftables` sandbox with no access to local LAN or agent secrets.
+- **Security & Privacy**: Hub restricts access to private RFC 1918 networks + Tailscale + explicitly configured local domains; Ed25519-signed OTA updates and releases with SHA-256 verification.
+
+---
+
+## 6. Pricing Summary
+
+- **1st GPU/CPU Worker**: Free forever (no account, no card, no cloud)
+- **Micro Solo ASICs** (Bitaxe, NerdQAxe, NerdMiner, Avalon Nano 3): Free forever (excluded from quota)
+- **Additional Active Workers**: $1 / month per active rig (billed in Worker-Days; idle/stopped rigs do not consume credits)
+- **Packs**: Starting at $5 (150 Worker-Days), payable in crypto via NOWPayments at https://essaimos.com/en/tarifs

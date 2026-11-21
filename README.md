@@ -2,17 +2,24 @@
   <img src="assets/icon.png" alt="Essaim OS" width="120" height="120" />
   <h1>Essaim OS</h1>
   <p>
-    <strong>Self-hosted GPU &amp; CPU mining OS and local fleet hub</strong><br />
-    <em>Raspberry Pi · Docker · Bare-Metal Linux USB · Windows WSL2 · Android &amp; Telegram</em>
+    <strong>Self-hosted GPU, CPU &amp; Solo ASIC mining OS and local-LAN fleet hub (Rust)</strong><br />
+    <em>Raspberry Pi · Docker · Bare-Metal Linux USB · Proxmox VM · Windows WSL2 · Bitaxe / NerdQAxe · Shelly Smart Plugs · Android &amp; Telegram</em>
   </p>
   <p>
-    <a href="https://essaimos.com/en"><strong>Website (essaimos.com)</strong></a> ·
-    <a href="https://essaimos.com/en/demo"><strong>Live Demo (5-GPU Hub)</strong></a> ·
-    <a href="https://essaimos.com/en/releases"><strong>Downloads &amp; Releases</strong></a> ·
-    <a href="https://essaimos.com/en/docs"><strong>Installation Docs</strong></a> ·
-    <a href="https://essaimos.com/en/smart-energy"><strong>World Electricity Tariffs</strong></a> ·
-    <a href="https://essaimos.com/en/mobile-telegram"><strong>Mobile &amp; Telegram</strong></a> ·
-    <a href="../../issues"><strong>Issues &amp; Support</strong></a>
+    <a href="https://essaimos.com/en"><img src="https://img.shields.io/badge/Website-essaimos.com-f5a623?style=flat-square" alt="Website essaimos.com" /></a>
+    <a href="https://essaimos.com/en/demo"><img src="https://img.shields.io/badge/Live_Demo-5--GPU_Hub-0ca30c?style=flat-square" alt="Interactive 5-GPU Live Demo" /></a>
+    <a href="docs/COMPARE.md"><img src="https://img.shields.io/badge/Pricing-1st_Rig_Free_%C2%B7_%241%2Fmo-2a78d6?style=flat-square" alt="1st Worker Free, $1/month per extra rig" /></a>
+    <a href="llms.txt"><img src="https://img.shields.io/badge/AI_%2F_LLMs-llms.txt-6f42c1?style=flat-square" alt="LLM-friendly index llms.txt" /></a>
+  </p>
+  <p>
+    <a href="https://essaimos.com/en"><strong>Website</strong></a> ·
+    <a href="https://essaimos.com/en/demo"><strong>Live Demo</strong></a> ·
+    <a href="https://essaimos.com/en/releases"><strong>Releases</strong></a> ·
+    <a href="docs/FAQ.md"><strong>FAQ</strong></a> ·
+    <a href="docs/COMPARE.md"><strong>vs HiveOS</strong></a> ·
+    <a href="docs/HARDWARE.md"><strong>Hardware</strong></a> ·
+    <a href="docs/ARCHITECTURE.md"><strong>Architecture</strong></a> ·
+    <a href="../../issues"><strong>Issues</strong></a>
   </p>
   <br />
   <img src="assets/banner.png" alt="Essaim OS overview" width="760" />
@@ -20,14 +27,47 @@
 
 ---
 
+**Essaim OS** is a self-hosted, local-LAN cryptocurrency mining operating system and fleet hub written in **Rust** — a zero-cloud, privacy-first alternative to HiveOS, RaveOS, minerstat, and SimpleMining for **NVIDIA/AMD GPU rigs**, **CPU miners**, **Windows WSL2 PCs**, and **Bitaxe / NerdQAxe / Avalon Nano 3 Solo ASICs**.
+
+*(FR : **Essaim OS** est un OS de minage GPU, CPU et ASIC Solo 100 % auto-hébergé en réseau local écrit en Rust — alternative sans cloud à HiveOS avec 1re travailleuse gratuite à vie, tarifs EDF Tempo / Spot mondiaux, prises connectées Shelly LAN, RGB/écrans/AIO Linux natifs et appli Android Tailscale.)*
+
+---
+
 ## Why Essaim OS?
 
-* **100% Local Fleet Control** — Run the Hub on a **Raspberry Pi**, **Docker**, a dedicated **x86 bare-metal USB/SSD** (`img.xz`), or a **Proxmox / QEMU VM** (`qcow2`). Zero cloud dependency: your farm keeps running if the internet goes down.
-* **Plug-and-Play Workers** — Boot rigs from a **Linux USB stick** (`essaim.img.xz`) or run directly inside **Windows WSL2** (`essaim-agent.exe` + `essaim-wsl.tar.gz`) without wiping Windows.
-* **GPU Auto-Tune & Mining Sandboxing** — Built-in GPU clock/power tuning, dual-mining & flight sheets, plus kernel-isolated sandboxing for custom third-party miners.
-* **Global Electricity Tariffs (9 Currencies)** — Fixed kWh rate, 2-tier / 3-tier Time-of-Use presets (France HC/HP & EDF Tempo Blue/White/Red, Spain 2.0TD, UK Economy 7 & Octopus Go, US/CA/AU/CH TOU), live Spot APIs (`Octopus Agile`, `Red Eléctrica PVPC`, `aWATTar DE/AT`, `Tibber`), price-cap auto-pause & **Wake-on-LAN** resume.
-* **Mobile App & Telegram Bot** — Monitor rigs, temperatures, profits and trigger start/stop/reboot remotely via Telegram commands or the Android app with embedded Tailscale (`tsnet`, no external VPN config needed).
-* **Simple, Outage-Resilient Pricing** — **1st worker FREE forever** (no account required), then **$1 / month per additional active worker**, verified via signed offline-resilient **Ed25519** tokens (`essaimos.com/en/tarifs`).
+* **100% Local Fleet Control (Rust)** — Run the Hub (`~20–30 MB` RAM) on a **Raspberry Pi**, **Docker**, a dedicated **x86 bare-metal USB/SSD** (`img.xz`), or a **Proxmox / QEMU VM** (`qcow2`). Zero cloud dependency: your farm keeps mining and stays manageable if the internet goes down.
+* **Plug-and-Play Workers + Free Solo ASICs** — Boot rigs from a **Linux USB stick** (`essaim.img.xz`), run inside **Windows WSL2** (`essaim-agent.exe` + `essaim-wsl.tar.gz`) without wiping Windows, and monitor/tune **Bitaxe, NerdQAxe, NerdMiner & Avalon Nano 3** Solo ASICs directly on your LAN (**free and excluded from worker quota**).
+* **Live GPU Auto-Tune, Per-GPU Xid Isolation & Sandboxing** — Live NVML/AMD hardware OC probing (including **NVIDIA RTX 5090 / 5080 / 5070 Ti / 5060 Blackwell**), 10-minute supervised overclock trials with per-`PCI_BUS_ID` rollback, chained GPU Auto-Tune, hot NVIDIA/ROCm driver switching, and Linux namespace + `nftables` sandboxing for custom miners.
+* **Global Electricity Tariffs (9 Currencies) & Local Shelly Smart Plugs** — Fixed kWh, 2/3-tier TOU presets (**France EDF Tempo** Blue/White/Red & HC/HP, Spain 2.0TD, UK Economy 7 & Octopus Go, US/CA/AU/CH), live Spot APIs (`Octopus Agile`, `REE PVPC`, `aWATTar DE/AT`, `Tibber`), plus **local-LAN Shelly Gen1–Gen4 smart plugs & meters** (`Plug S`, `Plus 1PM`, `Pro 4PM`, `Pro 3EM`) for exact wall-power kWh profitability, Graceful Off, and hardware Hard Reboot (`toggle_after=10`).
+* **Native Linux RGB, Cooler Displays & AIO Control (Zero OpenRGB)** — Built-in Rust drivers for Gigabyte/AORUS **RTX 50 Blackwell (`I²C 0x75`)** and ITE `IT5711` motherboards, AMD Wraith Prism, ASUS Aura, PWM case fans, **XPG MAESTRO PLUS 62DA (`125f:7601`)** cooler displays, and Linux-optimized **`liquidctl`** AIO watercoolers.
+* **Mobile App & Private Telegram Bot (0 Open Ports)** — Monitor and control your fleet from Wi-Fi or 4G/5G via the Android app with embedded **Tailscale (`tsnet`)** or private outbound-only Telegram bot alerts (GPU/CPU temps, Xids, Solo blocks, Shelly overtemp/overpower).
+* **Simple, Outage-Resilient Pricing** — **1st GPU/CPU worker FREE forever** (no account required) + **free micro Solo ASICs**, then **$1 / month per additional active rig** (billed per active Worker-Day, 3× cheaper than HiveOS), backed by offline-resilient **Ed25519** tokens ([essaimos.com/en/tarifs](https://essaimos.com/en/tarifs)).
+
+---
+
+## Knowledge Base & AI / LLM Index
+
+| Guide | Purpose |
+|---|---|
+| [`docs/FAQ.md`](docs/FAQ.md) | Direct answers on pricing, HiveOS migration, Windows WSL2, RTX 50 Blackwell, Solo ASICs, Shelly plugs & tariffs |
+| [`docs/COMPARE.md`](docs/COMPARE.md) | Side-by-side comparison vs HiveOS, RaveOS, minerstat & SimpleMining + fleet cost table (1–25 rigs) |
+| [`docs/HARDWARE.md`](docs/HARDWARE.md) | Complete hardware compatibility list (GPUs, CPUs, Solo ASICs, Shelly Gen1–4, RGB, XPG 62DA, `liquidctl` AIOs, PWM) |
+| [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) | Technical architecture: Rust Hub `:8420`, Rust Agent `:8421`, SQLite WAL, Ed25519 licensing, Tailscale & sandbox |
+| [`SECURITY.md`](SECURITY.md) | Local RFC 1918 threat model, SSRF protection, signed OTA verification & vulnerability disclosure |
+| [`llms.txt`](llms.txt) · [`llms-full.txt`](llms-full.txt) | Machine-readable specifications for LLMs, AI search engines, and coding assistants (`llmstxt.org`) |
+
+---
+
+## Open-Source Linux Hardware Ecosystem (`ESSAIM-OS`)
+
+Independent Linux hardware drivers extracted from or optimized for **Essaim OS** (usable standalone on any Linux desktop, homelab, or headless compute server):
+
+| Repository | Hardware / Scope | Highlights |
+|---|---|---|
+| [**`ESSAIM-OS/gigabyte-rtx50-rgb-linux`**](https://github.com/ESSAIM-OS/gigabyte-rtx50-rgb-linux) | Gigabyte / AORUS **RTX 5090 / 5080 / 5070 Ti / 5070 Blackwell** (`I²C 0x75`) & ITE **`IT5711` / `IT5702` / `IT8297`** motherboards (`048d:*`) | Pure Python 3 userspace driver, CLI & `systemd` daemon — zero OpenRGB, zero Qt, zero `pip` deps, `.deb` & `.run` kits |
+| [**`ESSAIM-OS/xpg-maestro-62da-linux`**](https://github.com/ESSAIM-OS/xpg-maestro-62da-linux) | **XPG MAESTRO PLUS 62DA** 3-zone 7-segment USB cooler display (`125f:7601`) | Pure Python 3 Linux USB driver & daemon (CPU/GPU/Hybrid/Cycle/Custom modes, `/run/essaim/display.json` live override) |
+| [**`ESSAIM-OS/liquidctl`**](https://github.com/ESSAIM-OS/liquidctl) | **NZXT Kraken**, **Corsair iCUE**, **Aquacomputer**, **ASUS ROG Ryujin/Ryuo**, **MSI CoreLiquid**, **Lian Li** AIOs & USB PSUs | Linux headless-optimized fork: lazy Pillow (no GUI deps), `<0.5 ms` sysfs USB pre-scan, `liquidctl-essaim` JSON bridge |
+| [**`ESSAIM-OS/essaim-drivers`**](https://github.com/ESSAIM-OS/essaim-drivers) | Precompiled **NVIDIA open kernel modules** & **AMD ROCm OpenCL** packages | Automated SHA-256-verified GPU driver packages for hot switching with 10-minute automatic rollback |
 
 <div align="center">
   <img src="assets/mobile-dashboard.jpg" alt="Essaim Hub mobile dashboard" width="230" />
@@ -77,6 +117,8 @@ Bare-metal workers include built-in Rust hardware control for RGB lighting and m
 | **Gigabyte / AORUS RTX 20 / 30 / 40 GPUs** | Gaming / Master / Vision / Eagle cards with RGB Fusion 2 | NVIDIA I²C (`0x62`, `0x63`, `0x70`, `0x71`, `0x72`) | Static color, Night blackout, GPU temp gauge & hive alert status |
 | **AMD Wraith Prism CPU Cooler** | Cooler Master / AMD Wraith Prism (via internal USB header cable) | USB HID (`2516:0051`) | Per-LED control of the 15-LED ring, fan blade LEDs, and AMD logo |
 | **ASUS Aura Sync Motherboards & Hubs** | ASUS ROG / TUF / Prime USB Aura & addressable controllers | USB HID (`0B05:18F3`, `1939`, `19AF`, `1872`, `1867`) | Static color, Night blackout, GPU temp gauge & hive status |
+| **XPG Cooler Display** | XPG MAESTRO PLUS 62DA 3-zone 7-segment display | USB HID (`125F:7601`) | Auto GPU/CPU, CPU, GPU, Hybrid, 5 s Cycle, Custom 3-zone, °C/°F, Night Mode (hybrid Rust `usbfs` + [`xpg-maestro-62da-linux`](https://github.com/ESSAIM-OS/xpg-maestro-62da-linux)) |
+| **AIO Coolers, USB Hubs & PSUs** | NZXT Kraken X/Z/Elite, Corsair iCUE Commander/Hydro/HX-RMi, Aquacomputer D5 Next/Quadro/Octo, ASUS ROG Ryujin/Ryuo, MSI CoreLiquid, Lian Li Galahad II/Uni Fan | USB HID / Bulk ([`ESSAIM-OS/liquidctl`](https://github.com/ESSAIM-OS/liquidctl)) | Liquid temp, pump/fan RPM, PSU W, pump safety floor `>=40%`, `100%` emergency at `48 °C` liquid, RGB sync, 0 Python processes if no AIO attached |
 | **Generic Linux Kernel LEDs** | Any RGB / multicolor LED exposed by the Linux kernel (`*rgb*`, `*multicolor*`, `*aura*`, `*aorus*`, or `multi_intensity`) | `/sys/class/leds` | RGB color / brightness control & Night blackout |
 
 * **Motherboard PWM case fans (`/sys/class/hwmon`)**: auto-loads `nct6775` (Nuvoton), `it87` (ITE `it8628`/`it8686`), `gigabyte-wmi`, `asus-wmi-sensors`, `asus-ec-sensors`, and `dell-smm-hwmon` — supports BIOS Auto, Fixed % while mining, and **GPU-temp target** mode.
